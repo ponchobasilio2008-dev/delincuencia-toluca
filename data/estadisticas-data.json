@@ -8,14 +8,14 @@
     },
     "delitos_sin_denuncia": {
         "title": "Cifra Negra (Delitos No Denunciados - 2023)",
-        "description": "Porcentaje de delitos no denunciados o no investigados (Cifra Negra). La falta de confianza es la principal causa.",
+        "description": "Porcentaje de delitos no denunciados o no investigados (Cifra Negra). La falta de confianza es la principal causa, afectando la credibilidad en las cifras oficiales.",
         "toluca": 94.3,
         "edomex": 92.1,
         "nacional": 88.4
     },
     "confianza_autoridades": {
         "title": "Confianza en Autoridades (INEGI - 2023)",
-        "description": "Porcentaje de la población que manifiesta mucha o algo de confianza en las siguientes instituciones:",
+        "description": "Porcentaje de la población que manifiesta mucha o algo de confianza en las siguientes instituciones (ordenado de mayor a menor confianza):",
         "instituciones": {
             "marina": 92.5,
             "ejercito": 88.9,

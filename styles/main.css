@@ -202,12 +202,15 @@ body {
 }
 
 
-/* --- ESTILOS PARA ESTADÍSTICAS INTERACTIVAS --- */
+/* --- ESTILOS PARA SECCIONES GENERALES --- */
 
 .content-section {
     padding: 40px 0;
     border-bottom: 1px solid #ddd;
 }
+
+/* --- ESTILOS PARA ESTADÍSTICAS INTERACTIVAS --- */
+
 .options-bar {
     display: flex;
     flex-wrap: wrap;
@@ -341,10 +344,25 @@ body {
     text-align: right;
 }
 
+.source-note a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
 /* Colores de resaltado de tasas en la tabla (simulación de semáforo) */
 .rate-low { color: #28a745; font-weight: 700; }     
 .rate-medium { color: #ffc107; font-weight: 700; } 
 .rate-high { color: var(--accent-color); font-weight: 700; }
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: var(--secondary-text);
+    color: white;
+    font-size: 0.8em;
+    margin-top: 40px;
+}
 
 /* --- MEDIA QUERIES (RESPONSIVE) --- */
 @media (max-width: 992px) {

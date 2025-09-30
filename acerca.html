@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de - Delincuencia en México</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Delincuencia en México</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="estados.html">Estados</a>
+            <a href="municipios.html">Municipios</a>
+            <a href="estadisticas.html">Estadísticas</a>
+            <a href="acerca.html" class="active">Acerca</a>
+            <span class="lang-switch">EN</span>
+        </div>
+    </nav>
+    
+    <main class="container">
+
+        <header class="report-header">
+            <h1>Acerca del Proyecto</h1>
+            <h2>Datos Abiertos y Metodología Transparente</h2>
+        </header>
+
+        <section class="content-section">
+            <h3>Nuestra Misión</h3>
+            <p>Este proyecto nace de la necesidad de traducir las **cifras oficiales de seguridad** en información accesible y comprensible para la ciudadanía del Valle de Toluca y del país. Buscamos fomentar la discusión informada y la participación cívica a través de la **visualización de datos** provenientes de fuentes confiables, haciendo uso de código abierto y diseño responsivo.</p>
+        </section>
+
+        <section class="content-section">
+            <h3>Fuentes de Datos Confiables</h3>
+            <p>Toda la información presentada se basa en datos abiertos y reportes oficiales. Las principales fuentes utilizadas son:</p>
+            <ul>
+                <li><strong>INEGI (Instituto Nacional de Estadística y Geografía):</strong> 
+                    <a href="https://www.inegi.org.mx/" target="_blank">Página Oficial del INEGI</a>
+                    <ul>
+                        <li><a href="https://www.inegi.org.mx/programas/envipe/2023/" target="_blank">Encuesta Nacional de Victimización y Percepción (ENVIPE)</a>: Usada para las secciones de **Estadísticas** (Cifra Negra, Percepción de Inseguridad).</li>
+                    </ul>
+                </li>
+                <li><strong>SESNSP (Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública):</strong> 
+                    <a href="https://www.gob.mx/sesnsp" target="_blank">Página Oficial del SESNSP</a>
+                    <ul>
+                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva" target="_blank">Datos Abiertos de Incidencia Delictiva</a>: Usados para las tasas de delitos por estado y municipio (Homicidio, Robo, Feminicidio).</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Los datos en las gráficas principales son **simulados** basados en las tendencias reportadas por estas instituciones, con fines de demostración de la visualización y funcionalidad interactiva. Las tasas y porcentajes en las tablas son representaciones realistas de las tendencias nacionales.</p>
+        </section>
+        
+        <section class="content-section">
+            <h3>Contacto y Colaboración</h3>
+            <p>Este es un proyecto de código abierto y se aloja gratuitamente en GitHub Pages. Si deseas reportar un error en el código, sugerir una nueva visualización o colaborar con el desarrollo web, puedes hacerlo a través de nuestro repositorio público.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

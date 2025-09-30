@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('data/estadisticas-data.json')
         .then(response => {
             if (!response.ok) {
-                throw new Error('No se pudo cargar el archivo de datos: estadisticas-data.json');
+                // Esto es crucial para detectar errores 404 de archivos
+                throw new Error('No se pudo cargar el archivo de datos: estadisticas-data.json (Ruta o archivo incorrecto).');
             }
             return response.json();
         })
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error("Error al cargar o procesar datos:", error);
             if (contentArea) {
-                contentArea.innerHTML = '<p style="color: red;">Error: No se pudieron cargar las estadísticas. Revisa la consola para más detalles.</p>';
+                contentArea.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
             }
         });
 
