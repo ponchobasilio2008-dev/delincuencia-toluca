@@ -1,0 +1,27 @@
+[
+    {
+        "periodo": "2023-T1",
+        "homicidio": 3.5,
+        "robo_vehiculo": 25.1
+    },
+    {
+        "periodo": "2023-T2",
+        "homicidio": 3.2,
+        "robo_vehiculo": 24.5
+    },
+    {
+        "periodo": "2023-T3",
+        "homicidio": 3.8,
+        "robo_vehiculo": 26.0
+    },
+    {
+        "periodo": "2023-T4",
+        "homicidio": 4.1,
+        "robo_vehiculo": 27.5
+    },
+    {
+        "periodo": "2024-T1",
+        "homicidio": 4.0,
+        "robo_vehiculo": 28.0
+    }
+]

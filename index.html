@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delincuencia en el Valle de Toluca y EdoMex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    </head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="#">Delincuencia en México</a>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">Inicio</a>
+            <a href="#">Estados</a>
+            <a href="#">Municipios</a>
+            <a href="#">Mapas</a>
+            <a href="#">Estadísticas</a>
+            <a href="#">Acerca</a>
+            <span class="lang-switch">EN</span>
+        </div>
+    </nav>
+    
+    <main class="container">
+
+        <header class="report-header">
+            <h1>Delincuencia en México</h1>
+            <h2>Reporte criminal de agosto 2025</h2>
+        </header>
+
+        <section class="data-dashboard">
+            
+            <div class="panel panel-left">
+                <h3 class="panel-title">tasas de criminalidad - ago. 2025</h3>
+                
+                <div class="filters">
+                    <select id="crime-type-selector">
+                        <option value="homicidio_int">Homicidio Intencional</option>
+                        <option value="robo_vehiculo">Robo de Vehículo</option>
+                        <option value="feminicidio">Feminicidio</option>
+                    </select>
+                </div>
+
+                <div class="color-legend">
+                    <span>1.8</span><span>...</span><span>49.9</span><span>56.7</span>
+                </div>
+
+                <div class="hex-map-container">
+                    <div class="hex-map-grid" id="hex-map">
+                        <div class="hex hex-sin" data-rate="49.9">SIN</div>
+                        <div class="hex hex-bc" data-rate="22.4">BC</div>
+                        <div class="hex hex-son" data-rate="36.1">SON</div>
+                        <div class="hex hex-chih" data-rate="43.0">CHIH</div>
+                        <div class="hex hex-coah" data-rate="15.5">COAH</div>
+                        <div class="hex hex-jal" data-rate="29.3">JAL</div>
+                        <div class="hex hex-mex" data-rate="10.0" title="Edomex/Toluca">MEX</div>
+                        <div class="hex hex-col" data-rate="56.7" title="COL, el más alto">COL</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-right">
+                
+                <div class="chart-main">
+                    <div class="chart-legend-small">
+                        <span class="line-inegi">INEGI ajustados estadísticamente</span>
+                        <span class="line-sesnsp">SESNSP víctimas</span>
+                    </div>
+                    <h4>Homicidio Intencional - Nacional</h4>
+                    <canvas id="chartHomicidio"></canvas>
+                </div>
+
+                <div class="mini-charts-grid">
+                    <div class="mini-chart">
+                        <h4>Secuestro - Nacional</h4>
+                        <canvas id="chartSecuestro"></canvas>
+                    </div>
+                    <div class="mini-chart">
+                        <h4>Extorsión - Nacional</h4>
+                        <canvas id="chartExtorsion"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="focus-toluca">
+            <h3>Foco Regional: Toluca y el Valle</h3>
+            <p>Análisis detallado de los delitos patrimoniales y la percepción de riesgo en la capital del Estado de México.</p>
+            </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

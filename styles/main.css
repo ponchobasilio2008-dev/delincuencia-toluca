@@ -1,0 +1,210 @@
+/* VARIABLES DE DISEÑO (Para consistencia y fácil cambio) */
+:root {
+    --bg-color: #ffffff; /* Fondo blanco */
+    --text-color: #1c2732; /* Texto principal oscuro */
+    --primary-color: #4A90E2; /* Azul para elementos de interfaz */
+    --accent-color: #cc0000; /* Rojo para tasas altas (como SIN) */
+    --secondary-text: #666;
+    --border-color: #e0e0e0;
+    --font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fc; /* Fondo muy claro para el cuerpo */
+    color: var(--text-color);
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* --- BARRA DE NAVEGACIÓN --- */
+.navbar {
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.nav-brand a {
+    font-weight: 700;
+    font-size: 1.2em;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--secondary-text);
+    padding: 0 15px;
+    font-size: 0.9em;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.lang-switch {
+    font-weight: 700;
+    color: var(--text-color);
+    padding-left: 15px;
+}
+
+/* --- ENCABEZADO DE REPORTE --- */
+.report-header {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+.report-header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.report-header h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: var(--secondary-text);
+    margin-top: 5px;
+}
+
+/* --- DASHBOARD PRINCIPAL (GRID) --- */
+.data-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Izquierda más pequeña, derecha más grande */
+    gap: 30px;
+}
+
+.panel {
+    background-color: var(--bg-color);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.panel-title {
+    font-size: 1.3em;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+
+/* --- PANEL IZQUIERDO (FILTROS Y MAPA) --- */
+.filters select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.color-legend span {
+    display: inline-block;
+    font-size: 0.8em;
+    color: var(--secondary-text);
+    padding-right: 10px;
+}
+
+.color-legend {
+    padding: 10px 0 20px;
+    background-color: #f0f0f0;
+    /* Simulando la barra de color debajo del select */
+    background-image: linear-gradient(to right, #ffffff, #fcd8d8, #e87e7e, #cc0000);
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* --- MAPA HEXAGONAL (SIMULACIÓN CSS) --- */
+.hex-map-container {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.hex-map-grid {
+    display: inline-grid;
+    grid-template-columns: repeat(6, 1fr); /* Ajusta las columnas para simular el patrón */
+    gap: 2px 1px;
+}
+
+.hex {
+    width: 60px;
+    height: 34.64px; /* w * 0.577 */
+    background: #f0f0f0; /* Color base */
+    color: var(--text-color);
+    font-size: 0.8em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: background-color 0.3s;
+    margin: 0 0 -17px 0; /* Para el patrón escalonado */
+}
+
+/* Color destacado para simular las tasas altas (SIN y COL) */
+.hex[data-rate="49.9"] { background: #e87e7e; color: white; }
+.hex[data-rate="56.7"] { background: var(--accent-color); color: white; }
+.hex[data-rate="10.0"] { background: #d3d3d3; } /* Tasa baja/media */
+
+
+/* --- PANEL DERECHO (GRÁFICOS) --- */
+.chart-main {
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 30px;
+}
+
+.chart-main h4 {
+    margin-top: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.chart-legend-small {
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+.line-inegi::before, .line-sesnsp::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 3px;
+    margin-right: 5px;
+}
+
+.line-inegi::before { background-color: #cc0000; }
+.line-sesnsp::before { background-color: #4A90E2; }
+
+
+.mini-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.mini-chart h4 {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+@media (max-width: 992px) {
+    .data-dashboard {
+        grid-template-columns: 1fr; /* Una sola columna en dispositivos pequeños */
+    }
+}
