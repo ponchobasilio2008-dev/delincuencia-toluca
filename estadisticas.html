@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas ENVIPE - INEGI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Delincuencia en México</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="estados.html">Estados</a>
+            <a href="municipios.html">Municipios</a>
+            <a href="estadisticas.html" class="active">Estadísticas</a>
+            <a href="#">Acerca</a>
+            <span class="lang-switch">EN</span>
+        </div>
+    </nav>
+    
+    <main class="container">
+
+        <header class="report-header">
+            <h1>Estadísticas Clave (INEGI ENVIPE)</h1>
+            <h2>Victimización, Percepción y Confianza</h2>
+        </header>
+
+        <section class="content-section">
+            <h3>Selecciona la Métrica a Visualizar</h3>
+            
+            <div class="options-bar">
+                <button class="stat-button active" data-stat="percepcion_inseguridad">Percepción de Inseguridad</button>
+                <button class="stat-button" data-stat="delitos_sin_denuncia">Cifra Negra (No Denunciados)</button>
+                <button class="stat-button" data-stat="confianza_autoridades">Confianza en Autoridades</button>
+            </div>
+
+            <div id="estadistica-content" class="visualization-area">
+                <p>Cargando datos. Si esto tarda, verifica que el archivo data/estadisticas-data.json exista y esté bien formado.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+        </div>
+    </footer>
+    
+    <script src="scripts/estadisticas.js"></script>
+</body>
+</html>

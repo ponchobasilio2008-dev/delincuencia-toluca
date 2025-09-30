@@ -1,9 +1,9 @@
-/* VARIABLES DE DISEÑO (Para consistencia y fácil cambio) */
+/* VARIABLES DE DISEÑO */
 :root {
-    --bg-color: #ffffff; /* Fondo blanco */
-    --text-color: #1c2732; /* Texto principal oscuro */
+    --bg-color: #ffffff;
+    --text-color: #1c2732; 
     --primary-color: #4A90E2; /* Azul para elementos de interfaz */
-    --accent-color: #cc0000; /* Rojo para tasas altas (como SIN) */
+    --accent-color: #cc0000; /* Rojo para tasas altas */
     --secondary-text: #666;
     --border-color: #e0e0e0;
     --font-family: 'Roboto', sans-serif;
@@ -14,7 +14,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f7f9fc; /* Fondo muy claro para el cuerpo */
+    background-color: #f7f9fc; 
     color: var(--text-color);
 }
 
@@ -83,7 +83,7 @@ body {
 /* --- DASHBOARD PRINCIPAL (GRID) --- */
 .data-dashboard {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Izquierda más pequeña, derecha más grande */
+    grid-template-columns: 1fr 2fr; 
     gap: 30px;
 }
 
@@ -121,7 +121,6 @@ body {
 .color-legend {
     padding: 10px 0 20px;
     background-color: #f0f0f0;
-    /* Simulando la barra de color debajo del select */
     background-image: linear-gradient(to right, #ffffff, #fcd8d8, #e87e7e, #cc0000);
     border-radius: 4px;
     text-align: center;
@@ -136,14 +135,14 @@ body {
 
 .hex-map-grid {
     display: inline-grid;
-    grid-template-columns: repeat(6, 1fr); /* Ajusta las columnas para simular el patrón */
+    grid-template-columns: repeat(6, 1fr); 
     gap: 2px 1px;
 }
 
 .hex {
     width: 60px;
-    height: 34.64px; /* w * 0.577 */
-    background: #f0f0f0; /* Color base */
+    height: 34.64px; 
+    background: #f0f0f0; 
     color: var(--text-color);
     font-size: 0.8em;
     font-weight: 700;
@@ -152,13 +151,13 @@ body {
     justify-content: center;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition: background-color 0.3s;
-    margin: 0 0 -17px 0; /* Para el patrón escalonado */
+    margin: 0 0 -17px 0; 
 }
 
-/* Color destacado para simular las tasas altas (SIN y COL) */
+/* Colores simulados para Hexágonos */
 .hex[data-rate="49.9"] { background: #e87e7e; color: white; }
 .hex[data-rate="56.7"] { background: var(--accent-color); color: white; }
-.hex[data-rate="10.0"] { background: #d3d3d3; } /* Tasa baja/media */
+.hex[data-rate="10.0"] { background: #d3d3d3; } 
 
 
 /* --- PANEL DERECHO (GRÁFICOS) --- */
@@ -202,9 +201,197 @@ body {
     font-weight: 500;
 }
 
+
+/* --- ESTILOS PARA ESTADÍSTICAS INTERACTIVAS --- */
+
+.content-section {
+    padding: 40px 0;
+    border-bottom: 1px solid #ddd;
+}
+.options-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-button {
+    background-color: #f0f0f0;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.stat-button:hover {
+    background-color: #e0e0e0;
+}
+
+.stat-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.stat-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.metric-card {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.metric-card h4 {
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 0;
+    color: #444;
+}
+
+.metric-card .value {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Colores de las tarjetas */
+.metric-card.primary { background-color: #fcebeb; border: 2px solid var(--accent-color); }
+.metric-card.secondary { background-color: #f0f8ff; border: 2px solid var(--primary-color); }
+.metric-card.national { background-color: #f7f7f7; border: 2px solid #ddd; }
+
+/* Estilos para el gráfico de barras de confianza (simulación CSS) */
+.bar-chart-container {
+    margin-top: 30px;
+    max-width: 800px;
+}
+.bar-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.bar-label {
+    width: 150px;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.bar-graph {
+    flex-grow: 1;
+    height: 25px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85em;
+    transition: width 1s ease-out; 
+}
+
+
+/* --- ESTILOS ADICIONALES PARA TABLAS Y NOTAS --- */
+
+.table-container {
+    overflow-x: auto; 
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    color: var(--text-color);
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.source-note {
+    font-size: 0.8em;
+    color: var(--secondary-text);
+    margin-top: 15px;
+    text-align: right;
+}
+
+/* Colores de resaltado de tasas en la tabla (simulación de semáforo) */
+.rate-low { color: #28a745; font-weight: 700; }     
+.rate-medium { color: #ffc107; font-weight: 700; } 
+.rate-high { color: var(--accent-color); font-weight: 700; }
+
 /* --- MEDIA QUERIES (RESPONSIVE) --- */
 @media (max-width: 992px) {
     .data-dashboard {
-        grid-template-columns: 1fr; /* Una sola columna en dispositivos pequeños */
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navegación para móvil (apilada) */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 5%;
+    }
+    
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-links a, .lang-switch {
+        padding: 5px 0;
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    /* Gráficos y hexágonos */
+    .mini-charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hex-map-grid {
+        grid-template-columns: repeat(4, 1fr); 
+    }
+    
+    .report-header h1 {
+        font-size: 2em;
+    }
+    
+    .report-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .options-bar {
+        flex-direction: column; /* Botones apilados */
     }
 }

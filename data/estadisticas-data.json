@@ -1,0 +1,27 @@
+{
+    "percepcion_inseguridad": {
+        "title": "Percepción de Inseguridad (INEGI - 2023)",
+        "description": "Porcentaje de la población de 18 años y más que se siente insegura en su entidad. Datos de la ENVIPE.",
+        "toluca": 85.1,
+        "edomex": 82.5,
+        "nacional": 74.6
+    },
+    "delitos_sin_denuncia": {
+        "title": "Cifra Negra (Delitos No Denunciados - 2023)",
+        "description": "Porcentaje de delitos no denunciados o no investigados (Cifra Negra). La falta de confianza es la principal causa.",
+        "toluca": 94.3,
+        "edomex": 92.1,
+        "nacional": 88.4
+    },
+    "confianza_autoridades": {
+        "title": "Confianza en Autoridades (INEGI - 2023)",
+        "description": "Porcentaje de la población que manifiesta mucha o algo de confianza en las siguientes instituciones:",
+        "instituciones": {
+            "marina": 92.5,
+            "ejercito": 88.9,
+            "guardia_nacional": 76.1,
+            "policia_estatal": 45.2,
+            "policia_municipal": 38.0
+        }
+    }
+}

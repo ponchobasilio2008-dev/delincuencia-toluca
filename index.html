@@ -6,19 +6,18 @@
     <title>Delincuencia en el Valle de Toluca y EdoMex</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
-    </head>
+</head>
 <body>
 
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="#">Delincuencia en México</a>
+            <a href="index.html">Delincuencia en México</a>
         </div>
         <div class="nav-links">
-            <a href="#" class="active">Inicio</a>
-            <a href="#">Estados</a>
-            <a href="#">Municipios</a>
-            <a href="#">Mapas</a>
-            <a href="#">Estadísticas</a>
+            <a href="index.html" class="active">Inicio</a>
+            <a href="estados.html">Estados</a>
+            <a href="municipios.html">Municipios</a>
+            <a href="estadisticas.html">Estadísticas</a>
             <a href="#">Acerca</a>
             <span class="lang-switch">EN</span>
         </div>
@@ -45,19 +44,25 @@
                 </div>
 
                 <div class="color-legend">
-                    <span>1.8</span><span>...</span><span>49.9</span><span>56.7</span>
+                    <span>1.8</span><span>8.7</span><span>15.5</span><span>22.4</span><span>29.3</span><span>36.1</span><span>43.0</span><span>49.9</span><span>56.7</span>
                 </div>
 
                 <div class="hex-map-container">
                     <div class="hex-map-grid" id="hex-map">
-                        <div class="hex hex-sin" data-rate="49.9">SIN</div>
                         <div class="hex hex-bc" data-rate="22.4">BC</div>
                         <div class="hex hex-son" data-rate="36.1">SON</div>
+                        <div class="hex hex-sin" data-rate="49.9">SIN</div>
                         <div class="hex hex-chih" data-rate="43.0">CHIH</div>
                         <div class="hex hex-coah" data-rate="15.5">COAH</div>
+                        <div class="hex hex-zac" data-rate="29.3">ZAC</div>
+                        <div class="hex hex-nay" data-rate="8.7">NAY</div>
                         <div class="hex hex-jal" data-rate="29.3">JAL</div>
+                        <div class="hex hex-gto" data-rate="36.1">GTO</div>
+                        <div class="hex hex-qro" data-rate="1.8">QRO</div>
                         <div class="hex hex-mex" data-rate="10.0" title="Edomex/Toluca">MEX</div>
                         <div class="hex hex-col" data-rate="56.7" title="COL, el más alto">COL</div>
+                        <div class="hex hex-tam" data-rate="22.4">TAM</div>
+                        <div class="hex hex-ver" data-rate="15.5">VER</div>
                     </div>
                 </div>
             </div>
@@ -87,13 +92,19 @@
 
         </section>
 
-        <section class="focus-toluca">
-            <h3>Foco Regional: Toluca y el Valle</h3>
-            <p>Análisis detallado de los delitos patrimoniales y la percepción de riesgo en la capital del Estado de México.</p>
-            </section>
+        <section class="content-section focus-toluca">
+            <h3>Foco Regional: Introducción al Valle de Toluca</h3>
+            <p>Toluca de Lerdo, como capital del Estado de México, presenta dinámicas de seguridad complejas que requieren un análisis detallado. Consulta la sección de **Municipios** para ver la comparativa de la zona conurbada.</p>
+        </section>
 
     </main>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+        </div>
+    </footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="scripts/main.js"></script>
 </body>

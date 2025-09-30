@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Municipal - Valle de Toluca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Delincuencia en México</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="estados.html">Estados</a>
+            <a href="municipios.html" class="active">Municipios</a>
+            <a href="estadisticas.html">Estadísticas</a>
+            <a href="#">Acerca</a>
+            <span class="lang-switch">EN</span>
+        </div>
+    </nav>
+    
+    <main class="container">
+
+        <header class="report-header">
+            <h1>Foco Regional: Delincuencia en el Valle de Toluca</h1>
+            <h2>Análisis de Toluca, Metepec, Lerma y Zinacantepec</h2>
+        </header>
+
+        <section class="content-section">
+            <h3>Mapa de Puntos de Incidencia Delictiva</h3>
+            <p>La concentración de delitos patrimoniales se da en las zonas conurbadas. El mapa de calor visualiza las colonias con mayor reporte de robo a transeúnte y robo de vehículo en el último mes. (Este mapa requiere librerías externas para ser funcional, pero ilustra el concepto).</p>
+            <div id="mapa-municipal" class="visualization-area" style="height: 400px; background-color: #e6f3ff; border: 1px dashed #4A90E2;">
+                <p style="text-align: center; padding-top: 150px; color: #4A90E2;">[Contenedor para Mapa Interactivo de Toluca]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3>Comparativa Municipal (Robo de Vehículo - Denuncias Trimestrales)</h3>
+            <div class="stat-metrics">
+                <div class="metric-card primary">
+                    <h4>TOLUCA (ROBO VEHÍCULO)</h4>
+                    <p class="value">850</p>
+                    <p class="source-note">Denuncias trimestrales (SESNSP)</p>
+                </div>
+                <div class="metric-card secondary">
+                    <h4>METEPEC</h4>
+                    <p class="value">210</p>
+                    <p class="source-note">Denuncias trimestrales (SESNSP)</p>
+                </div>
+                <div class="metric-card national">
+                    <h4>ZINACANTEPEC</h4>
+                    <p class="value">145</p>
+                    <p class="source-note">Denuncias trimestrales (SESNSP)</p>
+                </div>
+                <div class="metric-card national">
+                    <h4>LERMA</h4>
+                    <p class="value">110</p>
+                    <p class="source-note">Denuncias trimestrales (SESNSP)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
