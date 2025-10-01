@@ -1,8 +1,4 @@
-// scripts/mapas.js
 
-// --- LÓGICA DE MENÚ HAMBURGUESA (GLOBAL) ---
-// Estas funciones deben estar definidas en global.js, pero las redefino aquí
-// para asegurar que Leaflet pueda usarlas si se cargan primero.
 window.openNav = function() {
     document.getElementById("sidebar-menu").style.width = "250px"; 
 };
@@ -14,15 +10,12 @@ function closeNav() {
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Asocia el botón de cerrar al script al cargar
     const closeBtn = document.querySelector('.sidebar .closebtn');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeNav);
     }
     
-    
-    // --- 1. Lógica de Mapa de Estados (PÁGINA estados.html) ---
-    // [CÓDIGO DE INICIALIZACIÓN DEL MAPA DE ESTADOS]
+
     if (document.getElementById('mapa-estados')) {
         const mexicoCoords = [23.6345, -102.5528]; 
         const initialZoom = 5;
@@ -75,13 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 2. Lógica de GRÁFICO DE BARRAS MUNICIPAL (PÁGINA municipios.html) ---
-
     if (document.getElementById('chartMunicipalRobo')) {
         
         const ctx = document.getElementById('chartMunicipalRobo').getContext('2d');
         
-        // Datos basados en la sección "Comparativa Municipal"
         const municipalData = {
             municipios: ['Toluca', 'Metepec', 'Zinacantepec', 'Lerma'],
             casos: [850, 210, 145, 110] 

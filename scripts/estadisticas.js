@@ -3,18 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.stat-button');
     let allData = null; 
 
-    // 1. Cargar los datos JSON
     fetch('data/estadisticas-data.json')
         .then(response => {
             if (!response.ok) {
-                // Esto es crucial para detectar errores 404 de archivos
+         
                 throw new Error('No se pudo cargar el archivo de datos: estadisticas-data.json (Ruta o archivo incorrecto).');
             }
             return response.json();
         })
         .then(data => {
             allData = data;
-            // Mostrar la estadística por defecto al cargar la página
+  
             displayStatistic('percepcion_inseguridad');
         })
         .catch(error => {
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-    // 2. Manejar los clics en los botones (si existen)
     if (buttons.length > 0) {
         buttons.forEach(button => {
             button.addEventListener('click', () => {
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Función para renderizar el contenido
     function displayStatistic(type) {
         if (!allData || !contentArea) return; 
 
@@ -48,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         if (type === 'confianza_autoridades') {
-            // GRÁFICO DE BARRAS (CONFIANZA)
+            
             const instituciones = stat.instituciones;
             htmlContent += '<div class="bar-chart-container">';
             
@@ -68,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlContent += '</div>';
 
         } else {
-            // TARJETAS DE MÉTRICAS SIMPLES (PERCEPCIÓN/CIFRA NEGRA)
             htmlContent += `
                 <div class="stat-metrics">
                     <div class="metric-card primary">

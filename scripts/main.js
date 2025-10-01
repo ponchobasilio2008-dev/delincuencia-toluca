@@ -1,18 +1,17 @@
-// --- DECLARACIÓN GLOBAL DE openNav y closeNav (FUERA DE DOMContentLoaded) ---
+
 window.openNav = function() {
-    // Abre el menú lateral desde la derecha
+    
     document.getElementById("sidebar-menu").style.width = "250px"; 
 };
 
 function closeNav() {
-    // Cierra el menú lateral
+    
     document.getElementById("sidebar-menu").style.width = "0";
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. DATOS SIMULADOS NACIONALES PARA GRÁFICAS DE LÍNEA ---
     const labels = [
         'ene 15', 'jul 15', 'ene 16', 'jul 16', 'ene 17', 'jul 17', 'ene 18', 'jul 18', 
         'ene 19', 'jul 19', 'ene 20', 'jul 20', 'ene 21', 'jul 21', 'ene 22', 'jul 22', 
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataSecuestro = { tasa: [1.8, 1.7, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.3, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1] };
     const dataExtorsion = { tasa: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.2] };
 
-    // --- 2. DATOS POR ESTADO PARA EL MAPA HEXAGONAL (INTERACTIVO) ---
     const crimeData = {
         homicidio_int: {
             legend: ['1.8', '8.7', '15.5', '22.4', '29.3', '36.1', '43.0', '49.9', '56.7'],
@@ -54,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Función central para cambiar el color del hexágono basado en la tasa (Escala de calor)
     function getHexColor(rate, maxRate) {
         const normalized = rate / maxRate;
         if (normalized < 0.1) return '#ffffff'; 
@@ -65,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return '#cc0000'; 
     }
 
-    // --- 3. LÓGICA DE ACTUALIZACIÓN DE MAPA HEXAGONAL ---
+    // LÓGICA DE ACTUALIZACIÓN DE MAPA HEXAGONAL ---
     const crimeSelector = document.getElementById('crime-type-selector');
     const hexElements = document.querySelectorAll('.hex');
     const legendSpans = document.querySelectorAll('.color-legend span');
@@ -98,17 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // A. Escuchar el cambio en el selector
     if (crimeSelector) {
         crimeSelector.addEventListener('change', (event) => {
             updateHexMap(event.target.value);
         });
         
-        // Inicializar el mapa al cargar con la opción por defecto
         updateHexMap(crimeSelector.value);
     }
 
-    // --- 4. CONFIGURACIÓN E INICIALIZACIÓN DE GRÁFICAS (Chart.js) ---
     const chartConfig = {
         responsive: true,
         plugins: {
@@ -130,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // GRÁFICO PRINCIPAL DE HOMICIDIO
     if (document.getElementById('chartHomicidio')) {
         new Chart(document.getElementById('chartHomicidio').getContext('2d'), {
             type: 'line',
@@ -148,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // GRÁFICO MINI: SECUESTRO
     if (document.getElementById('chartSecuestro')) {
         new Chart(document.getElementById('chartSecuestro').getContext('2d'), {
             type: 'line',
@@ -160,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // GRÁFICO MINI: EXTORSIÓN
     if (document.getElementById('chartExtorsion')) {
         new Chart(document.getElementById('chartExtorsion').getContext('2d'), {
             type: 'line',
@@ -173,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 5. LÓGICA DEL MENÚ HAMBURGUESA ---
-    // Asociar el botón de cerrar al script
     const closeBtn = document.querySelector('.sidebar .closebtn');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeNav);
