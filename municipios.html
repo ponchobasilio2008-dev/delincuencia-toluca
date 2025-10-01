@@ -51,12 +51,15 @@
         </section>
 
         <section class="content-section">
-            <h3>Mapa de Puntos de Incidencia Delictiva (Visualización Conceptual)</h3>
-            <p>Este mapa ilustraría los puntos calientes (hotspots) de reportes de robo y extorsión a nivel de colonia, superponiendo los datos de incidencia con el mapa geográfico. Esto es esencial para la prevención focalizada.</p>
-    
-    <div id="mapa-municipal" class="visualization-area" style="height: 400px;">
-        </div>
-</section>
+            <h3>Gráfico de Incidencia: Robo de Vehículo por Municipio</h3>
+            <p>La siguiente gráfica ilustra la concentración de delitos patrimoniales en la capital (Toluca) en comparación con los principales municipios vecinos del Valle. Los datos corresponden a denuncias trimestrales (simuladas) del SESNSP.</p>
+            
+            <div id="grafica-municipal" class="visualization-area" style="height: 400px;">
+                <canvas id="chartMunicipalRobo"></canvas>
+            </div>
+            
+            <p class="source-note">Nota: Las cifras representan el volumen total de denuncias, sin ajustar por población.</p>
+        </section>
 
         <section class="content-section">
             <h3>Comparativa Municipal (Robo de Vehículo - Denuncias Trimestrales)</h3>
@@ -93,9 +96,8 @@
         </div>
     </footer>
     
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="scripts/mapas.js"></script> 
-    
     <script src="scripts/global.js"></script>
 </body>
 </html>

@@ -21,76 +21,114 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     
-    // --- FUNCIÓN CENTRAL DE INICIALIZACIÓN DE LEAFLET ---
-
-    function initializeLeafletMap(containerId, initialCoords, initialZoom, pointsData) {
-        if (!document.getElementById(containerId)) return;
-        
-        try {
-            // 1. Asegurar que el contenedor esté vacío antes de inicializar
-            document.getElementById(containerId).innerHTML = '';
-
-            // 2. Inicializar el mapa
-            const map = L.map(containerId).setView(initialCoords, initialZoom);
-
-            // 3. Añadir capa de mosaico
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-
-            // 4. FORZAR EL REDIBUJADO: CRÍTICO para solucionar el error de mosaicos vacíos
-            map.invalidateSize(); 
-
-            // 5. Añadir puntos de interés (si existen)
-            if (pointsData) {
-                pointsData.forEach(punto => {
-                    L.circle(punto.coords, {
-                        color: punto.color,
-                        fillColor: punto.color,
-                        fillOpacity: 0.6,
-                        radius: punto.cases * 0.5 
-                    }).addTo(map).bindPopup(`
-                        <b>${punto.name}</b><br>
-                        Delito: Robo de Vehículo (Sim.)<br>
-                        Casos (Trim.): <b>${punto.cases}</b>
-                    `);
-                });
-                
-                // Agregar marcador de referencia
-                L.marker(initialCoords).bindPopup("<b>Toluca Centro (Referencia)</b>").addTo(map);
-            }
-            
-
-        } catch (e) {
-            console.error(`Error al inicializar el mapa ${containerId}: `, e);
-            document.getElementById(containerId).innerHTML = '<p style="color:red; text-align:center; padding-top: 150px;">Error: No se pudo cargar el mapa. Verifique la consola.</p>';
-        }
-    }
-
-    // --- MAPA DE ESTADOS (estados.html) ---
+    // --- 1. Lógica de Mapa de Estados (PÁGINA estados.html) ---
+    // [CÓDIGO DE INICIALIZACIÓN DEL MAPA DE ESTADOS]
     if (document.getElementById('mapa-estados')) {
-        // (Tu lógica de mapa de estados, simplificada para usar la nueva función)
         const mexicoCoords = [23.6345, -102.5528]; 
-        // Lógica de actualización de panel lateral (updateInfoPanel) necesaria para estados.html
-        // ... (Debes definir updateInfoPanel si el panel lateral de estados.html es funcional)
-        initializeLeafletMap('mapa-estados', mexicoCoords, 5, null);
+        const initialZoom = 5;
+
+        const map = L.map('mapa-estados').setView(mexicoCoords, initialZoom);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const puntosInteres = [
+            { name: "CDMX", coords: [19.4326, -99.1332], hom: 22.1, rob: 40.5, esc: 11.2 },
+            { name: "ESTADO DE MÉXICO", coords: [19.2907, -99.6537], hom: 18.5, rob: 45.6, esc: 9.8 },
+            { name: "JALISCO", coords: [20.6597, -103.3496], hom: 33.0, rob: 22.4, esc: 10.5 },
+            { name: "NUEVO LEÓN", coords: [25.6866, -100.3161], hom: 12.3, rob: 15.0, esc: 10.9 },
+        ];
+        
+        puntosInteres.forEach(punto => {
+            L.marker(punto.coords).addTo(map)
+                .bindPopup(`<b>${punto.name}</b><br>Haz clic en el mapa para simular la consulta.`)
+                .on('click', () => updateInfoPanel(punto.name, punto.hom, punto.rob, punto.esc));
+        });
+
+        map.on('click', function(e) {
+            const lat = e.latlng.lat.toFixed(4);
+            const lng = e.latlng.lng.toFixed(4);
+            
+            updateInfoPanel("Área Geográfica Seleccionada", ((Math.random() * 50) + 5).toFixed(2), ((Math.random() * 30) + 10).toFixed(1), ((Math.random() * 3) + 9).toFixed(1));
+            
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent(`Ubicación: (${lat}, ${lng})`)
+                .openOn(map);
+        });
+        
+        function updateInfoPanel(stateName, homRate, robRate, escYears) {
+            const randomPopulation = Math.floor(Math.random() * 5000000) + 1000000;
+            
+            document.getElementById('estado-seleccionado').innerHTML = `
+                <h4>${stateName}</h4>
+                <p><strong>Población 2020:</strong> ${randomPopulation.toLocaleString()} personas</p>
+                <p><strong>Escolaridad Promedio:</strong> ${escYears} años</p>
+                <p style="color: #cc0000;"><strong>Homicidio Intencional:</strong> ${homRate} por 100k hab.</p>
+                <p><strong>Robo de Vehículo:</strong> ${robRate} por 100k hab.</p>
+                <p class="source-note"><a href="https://www.inegi.org.mx/" target="_blank">Ver más indicadores sociodemográficos</a></p>
+            `;
+        }
+        
+        updateInfoPanel(puntosInteres[1].name, puntosInteres[1].hom, puntosInteres[1].rob, puntosInteres[1].esc);
     }
 
 
-    // --- MAPA DE MUNICIPIOS (municipios.html) ---
-    if (document.getElementById('mapa-municipal')) {
-        const tolucaCoords = [19.2907, -99.6537]; 
-        const municipalZoom = 12; 
+    // --- 2. Lógica de GRÁFICO DE BARRAS MUNICIPAL (PÁGINA municipios.html) ---
 
-        // Puntos de incidencia específicos para ROBOS
-        const puntosRobo = [
-            { name: 'Toluca Centro/Norte', coords: [19.305, -99.67], cases: 350, color: 'darkred' }, 
-            { name: 'Toluca Sur/Salida', coords: [19.255, -99.65], cases: 500, color: 'darkred' }, 
-            { name: 'Metepec (Av. Tecnológico)', coords: [19.28, -99.58], cases: 210, color: 'orange' },        
-            { name: 'Zinacantepec Conurbado', coords: [19.33, -99.69], cases: 145, color: 'gold' }, 
-            { name: 'Lerma Zonas Industriales', coords: [19.33, -99.51], cases: 110, color: 'yellowgreen' },
-        ];
+    if (document.getElementById('chartMunicipalRobo')) {
+        
+        const ctx = document.getElementById('chartMunicipalRobo').getContext('2d');
+        
+        // Datos basados en la sección "Comparativa Municipal"
+        const municipalData = {
+            municipios: ['Toluca', 'Metepec', 'Zinacantepec', 'Lerma'],
+            casos: [850, 210, 145, 110] 
+        };
 
-        initializeLeafletMap('mapa-municipal', tolucaCoords, municipalZoom, puntosRobo);
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: municipalData.municipios,
+                datasets: [{
+                    label: 'Denuncias de Robo de Vehículo (Trimestrales)',
+                    data: municipalData.casos,
+                    backgroundColor: [
+                        '#cc0000', // Rojo para Toluca (el más alto)
+                        '#ff7f00', 
+                        '#ffb84d', 
+                        '#ffdb99'
+                    ],
+                    borderColor: [
+                        '#990000',
+                        '#cc6600',
+                        '#cc933d',
+                        '#ccb06a'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, 
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Concentración de Robo de Vehículo en el Valle de Toluca'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Número de Casos Reportados'
+                        }
+                    }
+                }
+            }
+        });
     }
 });
