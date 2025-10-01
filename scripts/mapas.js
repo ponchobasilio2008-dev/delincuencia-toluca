@@ -1,5 +1,6 @@
-// --- LÓGICA DE MENÚ HAMBURGUESA (GLOBAL) ---
-// Estas funciones deben estar declaradas globalmente (fuera de DOMContentLoaded) para el onclick en HTML
+// scripts/mapas.js
+
+// --- DECLARACIÓN GLOBAL DE openNav y closeNav (Menú Hamburguesa) ---
 window.openNav = function() {
     document.getElementById("sidebar-menu").style.width = "250px"; 
 };
@@ -10,6 +11,13 @@ function closeNav() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Asocia el botón de cerrar al script al cargar
+    const closeBtn = document.querySelector('.sidebar .closebtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeNav);
+    }
+    
     
     // --- 1. Lógica de Mapa de Estados (PÁGINA estados.html) ---
 
@@ -61,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
         
+        // Inicializar el panel con los datos de EDOMEX al cargar
         updateInfoPanel(puntosInteres[1].name, puntosInteres[1].hom, puntosInteres[1].rob, puntosInteres[1].esc);
     }
 
@@ -68,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('mapa-municipal')) {
         const tolucaCoords = [19.2907, -99.6537]; 
-        const municipalZoom = 11; 
+        const municipalZoom = 12; // Zoom ajustado para el Valle de Toluca
 
         const map = L.map('mapa-municipal').setView(tolucaCoords, municipalZoom);
 
@@ -76,27 +85,38 @@ document.addEventListener('DOMContentLoaded', () => {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        const puntosIncidencia = [
-            { coords: [19.26, -99.66], type: 'Robo de Vehículo', count: 85 }, 
-            { coords: [19.28, -99.60], type: 'Robo a Transeúnte', count: 50 }, 
-            { coords: [19.33, -99.68], type: 'Homicidio', count: 12 },        
-            { coords: [19.23, -99.55], type: 'Robo de Vehículo', count: 60 }, 
+        // Puntos de incidencia específicos para ROBOS (basados en las cifras de la tabla)
+        const puntosRobo = [
+            // Toluca (Zona de mayor robo de vehículo) - 850 casos
+            { name: 'Toluca Centro/Norte', coords: [19.305, -99.67], cases: 350, color: 'darkred' }, 
+            { name: 'Toluca Sur/Salida', coords: [19.255, -99.65], cases: 500, color: 'darkred' }, 
+            
+            // Metepec (Segundo más alto) - 210 casos
+            { name: 'Metepec (Av. Tecnológico)', coords: [19.28, -99.58], cases: 210, color: 'orange' },        
+            
+            // Zinacantepec - 145 casos
+            { name: 'Zinacantepec Conurbado', coords: [19.33, -99.69], cases: 145, color: 'gold' }, 
+            
+            // Lerma - 110 casos
+            { name: 'Lerma Zonas Industriales', coords: [19.33, -99.51], cases: 110, color: 'yellowgreen' },
         ];
 
-        puntosIncidencia.forEach(punto => {
+        puntosRobo.forEach(punto => {
+            // Usamos un círculo con un radio proporcional al número de casos
             L.circle(punto.coords, {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: punto.count * 15
+                color: punto.color,
+                fillColor: punto.color,
+                fillOpacity: 0.6,
+                radius: punto.cases * 0.5 // Ajuste para que el tamaño sea visible
             }).addTo(map).bindPopup(`
-                <b>${punto.type}</b><br>
-                Casos reportados (Trimestral): ${punto.count}<br>
-                <small>Simulación SESNSP</small>
+                <b>${punto.name}</b><br>
+                Delito: Robo de Vehículo (Sim.)<br>
+                Casos (Trim.): <b>${punto.cases}</b>
             `);
         });
-
-        L.marker(tolucaCoords).bindPopup("<b>Toluca Centro</b>").addTo(map);
+        
+        // Agregar un marcador de referencia para la capital
+        L.marker(tolucaCoords).bindPopup("<b>Toluca Centro (Referencia)</b>").addTo(map);
 
         // Remover el mensaje conceptual del HTML una vez que el mapa carga
         document.getElementById('mapa-municipal').innerHTML = '';
