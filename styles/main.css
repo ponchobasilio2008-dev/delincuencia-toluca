@@ -402,3 +402,9 @@ footer {
     .hex-map-grid { grid-template-columns: repeat(4, 1fr); }
     .options-bar { flex-direction: column; }
 }
+/* Asegura que el contenedor del mapa tenga una posición definida */
+#mapa-municipal {
+    height: 400px; 
+    /* Esta línea es clave para que Leaflet calcule correctamente la altura */
+    position: relative; 
+}

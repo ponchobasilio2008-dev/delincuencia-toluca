@@ -1,7 +1,14 @@
 // scripts/mapas.js
 
-// Las funciones openNav y closeNav deben estar definidas en global.js
-// No las definimos aquí para evitar conflictos, asumimos que GLOBAL.JS se carga.
+// --- DECLARACIÓN GLOBAL DE openNav y closeNav (desde global.js) ---
+window.openNav = function() {
+    document.getElementById("sidebar-menu").style.width = "250px"; 
+};
+
+function closeNav() {
+    document.getElementById("sidebar-menu").style.width = "0";
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -11,36 +18,64 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', closeNav);
     }
     
-    
-    // --- 1. Lógica de Mapa de Estados (PÁGINA estados.html) ---
+    // --- FUNCIÓN CENTRAL DE INICIALIZACIÓN DE LEAFLET ---
 
-    if (document.getElementById('mapa-estados')) {
-        // ... (Tu código para el mapa de Estados, el panel de info, y la inicialización de Leaflet va aquí.
-        // Lo omito por brevedad, pero asume que es el código grande y correcto).
-        // INICIALIZACIÓN DEL MAPA DE ESTADOS...
-        const mexicoCoords = [23.6345, -102.5528]; 
-        const initialZoom = 5;
+    function initializeLeafletMap(containerId, initialCoords, initialZoom, pointsData) {
+        if (!document.getElementById(containerId)) return;
+        
+        try {
+            // 1. Inicializar el mapa
+            const map = L.map(containerId).setView(initialCoords, initialZoom);
 
-        const map = L.map('mapa-estados').setView(mexicoCoords, initialZoom);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        // ... (resto de la lógica del mapa de estados)
+            // 2. Añadir capa de mosaico
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            // 3. Añadir puntos de interés (si existen)
+            if (pointsData) {
+                pointsData.forEach(punto => {
+                    L.circle(punto.coords, {
+                        color: punto.color,
+                        fillColor: punto.color,
+                        fillOpacity: 0.6,
+                        radius: punto.cases * 0.5 
+                    }).addTo(map).bindPopup(`
+                        <b>${punto.name}</b><br>
+                        Delito: Robo de Vehículo (Sim.)<br>
+                        Casos (Trim.): <b>${punto.cases}</b>
+                    `);
+                });
+                
+                // Agregar marcador de referencia
+                L.marker(initialCoords).bindPopup("<b>Toluca Centro (Referencia)</b>").addTo(map);
+            }
+            
+            // 4. Invalidar el tamaño para asegurar que se dibuje correctamente
+            map.invalidateSize(); 
+
+        } catch (e) {
+            console.error(`Error al inicializar el mapa ${containerId}: `, e);
+            document.getElementById(containerId).innerHTML = '<p style="color:red; text-align:center;">Error al cargar el mapa. Verifique las librerías de Leaflet.</p>';
+        }
     }
 
-    // --- 2. Lógica de Mapa Municipal (PÁGINA municipios.html) ---
+    // --- MAPA DE ESTADOS (estados.html) ---
+    if (document.getElementById('mapa-estados')) {
+        // (Tu lógica de mapa de estados, simplificada para usar la nueva función)
+        const mexicoCoords = [23.6345, -102.5528]; 
+        // Lógica de actualización de panel lateral (updateInfoPanel) necesaria para estados.html
+        // ... (Tu código updateInfoPanel debe ir aquí si no está en global.js) ...
+        initializeLeafletMap('mapa-estados', mexicoCoords, 5, null);
+    }
 
+
+    // --- MAPA DE MUNICIPIOS (municipios.html) ---
     if (document.getElementById('mapa-municipal')) {
         const tolucaCoords = [19.2907, -99.6537]; 
         const municipalZoom = 12; 
 
-        const map = L.map('mapa-municipal').setView(tolucaCoords, municipalZoom);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        // Puntos de incidencia específicos para ROBOS
+        // Puntos de incidencia específicos para ROBOS (usados en la tabla)
         const puntosRobo = [
             { name: 'Toluca Centro/Norte', coords: [19.305, -99.67], cases: 350, color: 'darkred' }, 
             { name: 'Toluca Sur/Salida', coords: [19.255, -99.65], cases: 500, color: 'darkred' }, 
@@ -49,22 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Lerma Zonas Industriales', coords: [19.33, -99.51], cases: 110, color: 'yellowgreen' },
         ];
 
-        puntosRobo.forEach(punto => {
-            L.circle(punto.coords, {
-                color: punto.color,
-                fillColor: punto.color,
-                fillOpacity: 0.6,
-                radius: punto.cases * 0.5 
-            }).addTo(map).bindPopup(`
-                <b>${punto.name}</b><br>
-                Delito: Robo de Vehículo (Sim.)<br>
-                Casos (Trim.): <b>${punto.cases}</b>
-            `);
-        });
-        
-        L.marker(tolucaCoords).bindPopup("<b>Toluca Centro (Referencia)</b>").addTo(map);
+        initializeLeafletMap('mapa-municipal', tolucaCoords, municipalZoom, puntosRobo);
 
-        // Remover el mensaje conceptual del HTML una vez que el mapa carga
+        // Remover el mensaje conceptual del HTML
         document.getElementById('mapa-municipal').innerHTML = '';
     }
 });
