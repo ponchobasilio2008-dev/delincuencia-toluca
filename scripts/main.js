@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataSecuestro = { tasa: [1.8, 1.7, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.3, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1] };
     const dataExtorsion = { tasa: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.2] };
 
-    // --- 2. DATOS POR ESTADO PARA EL MAPA HEXAGONAL ---
+    // --- 2. DATOS POR ESTADO PARA EL MAPA HEXAGONAL (INTERACTIVO) ---
     // Tasas por 100 mil habitantes, simulando 3 delitos diferentes.
     const crimeData = {
         homicidio_int: {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Función central para cambiar el color del hexágono basado en la tasa
+    // Función central para cambiar el color del hexágono basado en la tasa (Escala de calor)
     function getHexColor(rate, maxRate) {
         // Mapea la tasa a un color en la escala de calor (de blanco/gris a rojo)
         const normalized = rate / maxRate;
@@ -84,10 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 hex.setAttribute('data-rate', rate);
                 
                 // 2. Aplicar el color de fondo dinámico
-                hex.style.backgroundColor = getHexColor(rate, data.maxRate);
+                const bgColor = getHexColor(rate, data.maxRate);
+                hex.style.backgroundColor = bgColor;
                 
                 // 3. Cambiar el color del texto si es necesario (para contraste)
-                hex.style.color = (getHexColor(rate, data.maxRate) === '#ffffff' || getHexColor(rate, data.maxRate) === '#fcd8d8') ? '#1c2732' : 'white';
+                // Mantener el texto oscuro si el fondo es claro
+                const isLight = bgColor === '#ffffff' || bgColor === '#fcd8d8' || bgColor === '#e8a9a9';
+                hex.style.color = isLight ? '#1c2732' : 'white';
                 
                 // 4. Actualizar el tooltip (title)
                 hex.setAttribute('title', `${stateCode}: ${rate} por 100k hab.`);
@@ -98,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // C. Escuchar el cambio en el selector
     if (crimeSelector) {
         crimeSelector.addEventListener('change', (event) => {
+            // No es necesario que las gráficas cambien, solo el mapa
             updateHexMap(event.target.value);
         });
         
@@ -106,22 +110,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. CONFIGURACIÓN E INICIALIZACIÓN DE GRÁFICAS (Chart.js) ---
-    const chartConfig = {
-        // ... (Tu configuración Chart.js) ...
-    };
-
-    // (Tu código de inicialización de Chart.js para Homicidio, Secuestro, Extorsión va aquí abajo)
-    // Se ha omitido aquí por brevedad, pero debe mantenerse en tu archivo main.js real.
+    // Nota: Estas gráficas son estáticas y no cambian con el selector.
     
-    // EJEMPLO DE INICIALIZACIÓN (MANTÉN ESTE BLOQUE EN TU ARCHIVO REAL)
+    const chartConfig = {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            title: { display: false }
+        },
+        scales: {
+            x: { 
+                grid: { display: false },
+                ticks: { maxRotation: 0, minRotation: 0, autoSkip: true, maxTicksLimit: 6 } 
+            },
+            y: { 
+                beginAtZero: true,
+                title: { display: true, text: 'tasa anualizada' }
+            }
+        },
+        elements: {
+            point: { radius: 0 } 
+        }
+    };
+    
+    // GRÁFICO PRINCIPAL DE HOMICIDIO
     if (document.getElementById('chartHomicidio')) {
-        // GRÁFICO PRINCIPAL DE HOMICIDIO
-        const chartHomicidio = new Chart(document.getElementById('chartHomicidio').getContext('2d'), {
+        new Chart(document.getElementById('chartHomicidio').getContext('2d'), {
             type: 'line',
-            data: { /* ... datos de dataHomicidioNacional ... */ },
-            options: { /* ... opciones ... */ }
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: 'INEGI', data: dataHomicidioNacional.inegi, borderColor: '#cc0000', borderWidth: 2, tension: 0.4 },
+                    { label: 'SESNSP', data: dataHomicidioNacional.sesnsp, borderColor: '#4A90E2', borderWidth: 2, tension: 0.4 }
+                ]
+            },
+            options: {
+                ...chartConfig,
+                scales: { ...chartConfig.scales, y: { beginAtZero: false, min: 20 } } 
+            }
         });
     }
-    // (Asegúrate de incluir aquí también el código para chartSecuestro y chartExtorsion)
-    
+
+    // GRÁFICO MINI: SECUESTRO
+    if (document.getElementById('chartSecuestro')) {
+        new Chart(document.getElementById('chartSecuestro').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{ label: 'Secuestro', data: dataSecuestro.tasa, borderColor: '#4A90E2', borderWidth: 2, tension: 0.4, fill: false }]
+            },
+            options: chartConfig
+        });
+    }
+
+    // GRÁFICO MINI: EXTORSIÓN
+    if (document.getElementById('chartExtorsion')) {
+        new Chart(document.getElementById('chartExtorsion').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{ label: 'Extorsión', data: dataExtorsion.tasa, borderColor: '#cc0000', borderWidth: 2, tension: 0.4, fill: false }]
+            },
+            options: chartConfig
+        });
+    }
 });
