@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataExtorsion = { tasa: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.2] };
 
     // --- 2. DATOS POR ESTADO PARA EL MAPA HEXAGONAL (INTERACTIVO) ---
-    // Tasas por 100 mil habitantes, simulando 3 delitos diferentes.
     const crimeData = {
         homicidio_int: {
             legend: ['1.8', '8.7', '15.5', '22.4', '29.3', '36.1', '43.0', '49.9', '56.7'],
@@ -46,15 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Función central para cambiar el color del hexágono basado en la tasa (Escala de calor)
     function getHexColor(rate, maxRate) {
-        // Mapea la tasa a un color en la escala de calor (de blanco/gris a rojo)
         const normalized = rate / maxRate;
-        
-        if (normalized < 0.1) return '#ffffff'; // Tasa muy baja
+        if (normalized < 0.1) return '#ffffff'; 
         if (normalized < 0.2) return '#fcd8d8';
         if (normalized < 0.4) return '#e8a9a9';
         if (normalized < 0.6) return '#e07d7d';
         if (normalized < 0.8) return '#cc4c4c';
-        return '#cc0000'; // Tasa muy alta (rojo)
+        return '#cc0000'; 
     }
 
     // --- 3. LÓGICA DE ACTUALIZACIÓN DE MAPA HEXAGONAL ---
@@ -67,41 +64,32 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!data) return;
 
-        // A. Actualizar la Leyenda de Colores
         legendSpans.forEach((span, index) => {
             if (data.legend[index]) {
                 span.textContent = data.legend[index];
             }
         });
         
-        // B. Actualizar las Tasas y Colores de los Hexágonos
         hexElements.forEach(hex => {
             const stateCode = hex.textContent.trim();
             const rate = data.states[stateCode];
 
             if (rate !== undefined) {
-                // 1. Actualizar el atributo data-rate
                 hex.setAttribute('data-rate', rate);
-                
-                // 2. Aplicar el color de fondo dinámico
                 const bgColor = getHexColor(rate, data.maxRate);
                 hex.style.backgroundColor = bgColor;
                 
-                // 3. Cambiar el color del texto si es necesario (para contraste)
-                // Mantener el texto oscuro si el fondo es claro
                 const isLight = bgColor === '#ffffff' || bgColor === '#fcd8d8' || bgColor === '#e8a9a9';
                 hex.style.color = isLight ? '#1c2732' : 'white';
                 
-                // 4. Actualizar el tooltip (title)
                 hex.setAttribute('title', `${stateCode}: ${rate} por 100k hab.`);
             }
         });
     }
 
-    // C. Escuchar el cambio en el selector
+    // A. Escuchar el cambio en el selector
     if (crimeSelector) {
         crimeSelector.addEventListener('change', (event) => {
-            // No es necesario que las gráficas cambien, solo el mapa
             updateHexMap(event.target.value);
         });
         
@@ -110,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. CONFIGURACIÓN E INICIALIZACIÓN DE GRÁFICAS (Chart.js) ---
-    // Nota: Estas gráficas son estáticas y no cambian con el selector.
+    // ESTE BLOQUE FUE REINTEGRADO PARA SOLUCIONAR EL PROBLEMA DE LAS GRÁFICAS FALTANTES
     
     const chartConfig = {
         responsive: true,
@@ -172,6 +160,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{ label: 'Extorsión', data: dataExtorsion.tasa, borderColor: '#cc0000', borderWidth: 2, tension: 0.4, fill: false }]
             },
             options: chartConfig
+        });
+    }
+
+    // --- 5. LÓGICA DEL MENÚ HAMBURGUESA ---
+    const navLinks = document.querySelector('.nav-links');
+    const navBar = document.querySelector('.navbar');
+    
+    // Solo si estamos en una pantalla móvil, añadimos el botón
+    if (window.innerWidth <= 768) {
+        const menuButton = document.createElement('button');
+        menuButton.innerHTML = '☰'; // Icono de hamburguesa
+        menuButton.classList.add('hamburger-menu');
+        
+        // Agregar el botón al navbar
+        const navBrand = document.querySelector('.nav-brand');
+        if (navBrand) {
+            navBar.insertBefore(menuButton, navBrand.nextSibling);
+        }
+        
+        // Ocultar los enlaces por defecto
+        if (navLinks) {
+            navLinks.style.display = 'none';
+            navLinks.classList.add('mobile-hidden');
+        }
+
+        // Evento para mostrar/ocultar
+        menuButton.addEventListener('click', () => {
+            if (navLinks.classList.contains('mobile-hidden')) {
+                navLinks.style.display = 'flex';
+                navLinks.classList.remove('mobile-hidden');
+            } else {
+                navLinks.style.display = 'none';
+                navLinks.classList.add('mobile-hidden');
+            }
         });
     }
 });
