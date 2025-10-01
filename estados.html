@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análisis de Estados - Delincuencia en México</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -26,17 +27,48 @@
     <main class="container">
 
         <header class="report-header">
-            <h1>Análisis Comparativo por Estado</h1>
-            <h2>Tasas de Incidencia Delictiva (Último trimestre)</h2>
+            <h1>Acciones y Programas > Incidencia Delictiva Nacional</h1>
+            <h2>Datos Abiertos de Incidencia Delictiva (SESNSP)</h2>
         </header>
 
         <section class="content-section">
-            <h3>El Estado de México en el Contexto Nacional</h3>
-            <p>El Estado de México (Edomex) históricamente presenta un volumen alto de delitos patrimoniales. Las tasas que se muestran a continuación, provenientes del **SESNSP**, están ajustadas por cada 100 mil habitantes, permitiendo una comparación más justa entre entidades federativas. Las tasas más altas se resaltan en rojo para indicar puntos críticos.</p>
+            <h3>Marco de Referencia: Delitos de Fuero Común</h3>
+            <p>La información a nivel estatal se obtiene directamente de los registros ministeriales, centralizados por el **Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública (SESNSP)**. Es el indicador más usado para medir la respuesta institucional ante el delito. Sin embargo, no incluye la Cifra Negra.</p>
+            <p>Utiliza el mapa interactivo a continuación para contrastar los indicadores de seguridad (SESNSP) con los datos sociodemográficos clave (INEGI) de cada entidad federativa.</p>
+            
+            <div class="data-document-grid">
+                <div class="document-block">
+                    <h4>Documentos Relacionados</h4>
+                    <ul>
+                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/reportes-de-incidencia-del-fuero-comun" target="_blank">Reportes de incidencia del fuero común</a></li>
+                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/informe-mensual-de-incidencia-delictiva" target="_blank">Informe mensual de incidencia delictiva</a></li>
+                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/informe-de-violencia-contra-las-mujeres" target="_blank">Informe de violencia contra las mujeres</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="source-note">Fuente principal: <a href="https://www.gob.mx/sesnsp" target="_blank">SESNSP</a></p>
         </section>
 
         <section class="content-section">
+            <h3>Consulta de Indicadores por Área Geográfica</h3>
+            <p>Haz clic en los marcadores de las capitales estatales o en cualquier punto del mapa para simular la consulta de indicadores sociodemográficos y las tasas de delincuencia.</p>
+            
+            <div class="map-interactive-container">
+                <div id="mapa-estados" style="height: 450px;"></div>
+                <div class="map-info-panel" id="estado-seleccionado">
+                    <h4>Estado de México (Seleccionado)</h4>
+                    <p>Población 2020: **[Datos INEGI]**</p>
+                    <p>Escolaridad: **[Datos INEGI]**</p>
+                    <p style="color: #cc0000;">Homicidio Intencional: **[Datos SESNSP]**</p>
+                    <p><a href="https://www.inegi.org.mx/programas/ccpv/2020/" target="_blank">Ver más indicadores sociodemográficos</a></p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
             <h3>Tabla de Incidencia Delictiva (Top 10 Nacional)</h3>
+            <p>Esta tabla muestra una comparativa de los delitos de mayor preocupación a nivel nacional, normalizados por cada 100 mil habitantes para una lectura justa del riesgo en cada entidad.</p>
             <div class="table-container visualization-area">
                 <table class="data-table">
                     <thead>
@@ -62,10 +94,10 @@
                     </tbody>
                 </table>
             </div>
-            <p class="source-note">Fuente: SESNSP. Tasas anualizadas por 100 mil habitantes. Datos simulados con base en tendencias históricas. Consulta la sección <a href="acerca.html">Acerca</a> para ver enlaces directos a las fuentes.</p>
+            <p class="source-note">Consulta la sección <a href="acerca.html">Acerca</a> para ver enlaces directos a las fuentes.</p>
             
             <h4>Conclusiones sobre el Estado de México</h4>
-            <p>Como se observa en la tabla, el **Estado de México** no figura entre los primeros lugares en la tasa de **Homicidio Intencional**, pero se mantiene persistentemente en los lugares más altos a nivel nacional en **Robo de Vehículo** y **Feminicidio**. Este patrón indica una problemática enfocada en la violencia de género y los delitos patrimoniales de alto impacto, lo que justifica un análisis más profundo a nivel municipal.</p>
+            <p>El **Estado de México** se mantiene persistentemente en los lugares más altos a nivel nacional en **Robo de Vehículo** y **Feminicidio**. Este patrón indica una problemática enfocada en la violencia de género y los delitos patrimoniales de alto impacto, lo que justifica un análisis más profundo a nivel municipal, especialmente en el Valle de Toluca.</p>
         </section>
     </main>
 
@@ -75,7 +107,7 @@
         </div>
     </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="scripts/mapas.js"></script>
 </body>
 </html>

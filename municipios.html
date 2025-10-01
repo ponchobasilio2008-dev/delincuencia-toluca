@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análisis Municipal - Valle de Toluca</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -29,10 +30,16 @@
             <h1>Foco Regional: Delincuencia en el Valle de Toluca</h1>
             <h2>Análisis de Toluca, Metepec, Lerma y Zinacantepec</h2>
         </header>
+        
+        <section class="content-section">
+            <h3>La Complejidad de la Zona Metropolitana</h3>
+            <p>El Valle de Toluca no es una unidad de seguridad homogénea. La delincuencia se mueve y se concentra en puntos clave de la conurbación y las entradas/salidas de la capital. El análisis a nivel municipal, con datos desagregados del **SESNSP**, permite identificar los focos rojos y las áreas donde la coordinación policial debe ser prioritaria.</p>
+            <p>El **robo de vehículo** es un delito que afecta toda la región, siendo un indicador clave de la actividad de la delincuencia organizada y común en la zona.</p>
+        </section>
 
         <section class="content-section">
-            <h3>Mapa de Puntos de Incidencia Delictiva</h3>
-            <p>El Valle de Toluca es un área metropolitana con una dinámica delictiva muy localizada. La concentración de **delitos patrimoniales** se da en las zonas conurbadas, especialmente en las fronteras entre Toluca y Metepec/Zinacantepec. El mapa de calor (área azul abajo) ilustra cómo los reportes de **robo a transeúnte** y **robo de vehículo** se agrupan, siendo un recurso vital para la planeación de seguridad. (Este mapa requiere librerías externas para ser funcional, pero ilustra el concepto).</p>
+            <h3>Mapa de Puntos de Incidencia Delictiva (Visualización Conceptual)</h3>
+            <p>Este mapa ilustraría los puntos calientes (hotspots) de reportes de robo y extorsión a nivel de colonia, superponiendo los datos de incidencia con el mapa geográfico. Esto es esencial para la prevención focalizada.</p>
             <div id="mapa-municipal" class="visualization-area" style="height: 400px; background-color: #e6f3ff; border: 1px dashed #4A90E2;">
                 <p style="text-align: center; padding-top: 150px; color: #4A90E2;">[Contenedor para Mapa Interactivo de Toluca]</p>
             </div>
@@ -40,7 +47,7 @@
 
         <section class="content-section">
             <h3>Comparativa Municipal (Robo de Vehículo - Denuncias Trimestrales)</h3>
-            <p>Los datos del SESNSP a nivel municipal reflejan el alto volumen de delitos patrimoniales en la capital (Toluca), que supera la suma de municipios vecinos clave. Esta tendencia subraya la necesidad de coordinación metropolitana.</p>
+            <p>Los datos del SESNSP a nivel municipal reflejan el alto volumen de delitos patrimoniales en la capital (Toluca), que supera la suma de municipios vecinos clave. Esta tendencia subraya la necesidad de coordinación metropolitana para combatir la delincuencia de manera efectiva.</p>
             <div class="stat-metrics">
                 <div class="metric-card primary">
                     <h4>TOLUCA (ROBO VEHÍCULO)</h4>
@@ -73,7 +80,7 @@
         </div>
     </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="scripts/mapas.js"></script>
 </body>
 </html>

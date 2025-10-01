@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delincuencia en el Valle de Toluca y EdoMex</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -31,11 +32,11 @@
         </header>
         
         <section class="content-section">
-            <h3>Contexto Nacional: Entendiendo las Cifras</h3>
-            <p>Los indicadores de seguridad se dividen principalmente en **incidencia delictiva** (denuncias ante el Ministerio Público, SESNSP) y **victimización/percepción** (encuestas directas a la ciudadanía, INEGI). Las gráficas de tendencia a la derecha muestran la disparidad histórica entre ambas fuentes, donde la línea roja (**INEGI**) suele reflejar un número de víctimas mayor debido a la **Cifra Negra** (delitos no denunciados).</p>
-            <p>Esta plataforma busca ofrecer una lectura clara de las tendencias de alto impacto a nivel nacional y en la región de Toluca. La información utilizada está referenciada en la sección <a href="acerca.html">Acerca</a>.</p>
+            <h3>Panorama General de la Seguridad Pública</h3>
+            <p>La seguridad pública en México se aborda desde dos perspectivas principales: la **incidencia delictiva** (delitos denunciados y registrados por el gobierno) y la **percepción ciudadana** (el sentimiento de inseguridad y la tasa real de victimización, capturada por encuestas independientes). Es crucial entender ambos indicadores para obtener una imagen completa.</p>
+            <p>A continuación, se presentan los datos nacionales más recientes sobre los delitos de alto impacto, contrastando las cifras oficiales del **SESNSP** (línea azul) con las tendencias ajustadas de victimización del **INEGI** (línea roja), reflejando la persistente **Cifra Negra** (delitos no denunciados).</p>
         </section>
-
+        
         <section class="data-dashboard">
             
             <div class="panel panel-left">
@@ -99,19 +100,19 @@
         </section>
 
         <section class="content-section focus-toluca">
-            <h3>Foco Regional: Introducción al Valle de Toluca</h3>
-            <p>El Valle de Toluca, compuesto por la capital y municipios clave como Metepec y Zinacantepec, es un núcleo económico y poblacional con retos específicos. La delincuencia aquí se concentra principalmente en **delitos patrimoniales** (robo de vehículo y a transeúnte), afectando directamente la calidad de vida y la actividad económica. Consulta la sección de **Municipios** para ver la comparativa de la zona conurbada.</p>
+            <h3>Foco Regional: El Reto del Valle de Toluca</h3>
+            <p>Si bien las gráficas anteriores muestran el panorama nacional, el **Valle de Toluca** (incluyendo Toluca, Metepec y Zinacantepec) presenta retos particulares que se desvían de la media federal. Aquí, la problemática se concentra en los **delitos patrimoniales de alto impacto** como el robo de vehículo. Consulta las secciones **Estados** y **Municipios** para un análisis detallado de la región.</p>
         </section>
 
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos. <a href="acerca.html">Ver Metodología</a></p>
         </div>
     </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 </html>
