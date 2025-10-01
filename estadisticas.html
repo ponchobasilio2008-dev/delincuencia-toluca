@@ -5,15 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas ENVIPE - INEGI</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+
+    <div id="sidebar-menu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Inicio</a>
+        <a href="estados.html">Estados</a>
+        <a href="municipios.html">Municipios</a>
+        <a href="estadisticas.html" class="active">Estadísticas</a>
+        <a href="acerca.html">Acerca</a>
+        <a href="#" class="lang-switch">EN / ES</a>
+    </div>
 
     <nav class="navbar">
         <div class="nav-brand">
             <a href="index.html">Delincuencia en México</a>
         </div>
-        <div class="nav-links">
+        
+        <button class="hamburger-menu" onclick="openNav()">☰</button>
+        
+        <div class="nav-links desktop-only">
             <a href="index.html">Inicio</a>
             <a href="estados.html">Estados</a>
             <a href="municipios.html">Municipios</a>

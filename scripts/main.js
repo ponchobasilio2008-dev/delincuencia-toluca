@@ -1,7 +1,18 @@
+// --- DECLARACIÓN GLOBAL DE openNav y closeNav (FUERA DE DOMContentLoaded) ---
+window.openNav = function() {
+    // Abre el menú lateral desde la derecha
+    document.getElementById("sidebar-menu").style.width = "250px"; 
+};
+
+function closeNav() {
+    // Cierra el menú lateral
+    document.getElementById("sidebar-menu").style.width = "0";
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. DATOS SIMULADOS NACIONALES PARA GRÁFICAS DE LÍNEA ---
-    // (Estos datos son fijos para Homicidio/Secuestro/Extorsión)
     const labels = [
         'ene 15', 'jul 15', 'ene 16', 'jul 16', 'ene 17', 'jul 17', 'ene 18', 'jul 18', 
         'ene 19', 'jul 19', 'ene 20', 'jul 20', 'ene 21', 'jul 21', 'ene 22', 'jul 22', 
@@ -98,8 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. CONFIGURACIÓN E INICIALIZACIÓN DE GRÁFICAS (Chart.js) ---
-    // ESTE BLOQUE FUE REINTEGRADO PARA SOLUCIONAR EL PROBLEMA DE LAS GRÁFICAS FALTANTES
-    
     const chartConfig = {
         responsive: true,
         plugins: {
@@ -164,36 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 5. LÓGICA DEL MENÚ HAMBURGUESA ---
-    const navLinks = document.querySelector('.nav-links');
-    const navBar = document.querySelector('.navbar');
-    
-    // Solo si estamos en una pantalla móvil, añadimos el botón
-    if (window.innerWidth <= 768) {
-        const menuButton = document.createElement('button');
-        menuButton.innerHTML = '☰'; // Icono de hamburguesa
-        menuButton.classList.add('hamburger-menu');
-        
-        // Agregar el botón al navbar
-        const navBrand = document.querySelector('.nav-brand');
-        if (navBrand) {
-            navBar.insertBefore(menuButton, navBrand.nextSibling);
-        }
-        
-        // Ocultar los enlaces por defecto
-        if (navLinks) {
-            navLinks.style.display = 'none';
-            navLinks.classList.add('mobile-hidden');
-        }
-
-        // Evento para mostrar/ocultar
-        menuButton.addEventListener('click', () => {
-            if (navLinks.classList.contains('mobile-hidden')) {
-                navLinks.style.display = 'flex';
-                navLinks.classList.remove('mobile-hidden');
-            } else {
-                navLinks.style.display = 'none';
-                navLinks.classList.add('mobile-hidden');
-            }
-        });
+    // Asociar el botón de cerrar al script
+    const closeBtn = document.querySelector('.sidebar .closebtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeNav);
     }
 });

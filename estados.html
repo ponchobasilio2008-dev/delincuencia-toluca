@@ -10,11 +10,24 @@
 </head>
 <body>
 
+    <div id="sidebar-menu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Inicio</a>
+        <a href="estados.html" class="active">Estados</a>
+        <a href="municipios.html">Municipios</a>
+        <a href="estadisticas.html">Estadísticas</a>
+        <a href="acerca.html">Acerca</a>
+        <a href="#" class="lang-switch">EN / ES</a>
+    </div>
+
     <nav class="navbar">
         <div class="nav-brand">
             <a href="index.html">Delincuencia en México</a>
         </div>
-        <div class="nav-links">
+        
+        <button class="hamburger-menu" onclick="openNav()">☰</button>
+        
+        <div class="nav-links desktop-only">
             <a href="index.html">Inicio</a>
             <a href="estados.html" class="active">Estados</a>
             <a href="municipios.html">Municipios</a>
@@ -57,7 +70,7 @@
             <div class="map-interactive-container">
                 <div id="mapa-estados" style="height: 450px;"></div>
                 <div class="map-info-panel" id="estado-seleccionado">
-                    <h4>Estado de México (Seleccionado)</h4>
+                    <h4>Estado de México (Cargando...)</h4>
                     <p>Población 2020: **[Datos INEGI]**</p>
                     <p>Escolaridad: **[Datos INEGI]**</p>
                     <p style="color: #cc0000;">Homicidio Intencional: **[Datos SESNSP]**</p>

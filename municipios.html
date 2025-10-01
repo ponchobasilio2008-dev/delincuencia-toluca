@@ -10,11 +10,24 @@
 </head>
 <body>
 
+    <div id="sidebar-menu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Inicio</a>
+        <a href="estados.html">Estados</a>
+        <a href="municipios.html" class="active">Municipios</a>
+        <a href="estadisticas.html">Estadísticas</a>
+        <a href="acerca.html">Acerca</a>
+        <a href="#" class="lang-switch">EN / ES</a>
+    </div>
+
     <nav class="navbar">
         <div class="nav-brand">
             <a href="index.html">Delincuencia en México</a>
         </div>
-        <div class="nav-links">
+        
+        <button class="hamburger-menu" onclick="openNav()">☰</button>
+        
+        <div class="nav-links desktop-only">
             <a href="index.html">Inicio</a>
             <a href="estados.html">Estados</a>
             <a href="municipios.html" class="active">Municipios</a>
@@ -40,10 +53,10 @@
         <section class="content-section">
             <h3>Mapa de Puntos de Incidencia Delictiva (Visualización Conceptual)</h3>
             <p>Este mapa ilustraría los puntos calientes (hotspots) de reportes de robo y extorsión a nivel de colonia, superponiendo los datos de incidencia con el mapa geográfico. Esto es esencial para la prevención focalizada.</p>
-    <div id="mapa-municipal" class="visualization-area" style="height: 400px;">
-        <p style="text-align: center; padding-top: 150px; color: #4A90E2;">[Contenedor para Mapa Interactivo de Toluca]</p>
-    </div>
-</section>
+            <div id="mapa-municipal" class="visualization-area" style="height: 400px;">
+                <p style="text-align: center; padding-top: 150px; color: #4A90E2;">[Contenedor para Mapa Interactivo de Toluca]</p>
+            </div>
+        </section>
 
         <section class="content-section">
             <h3>Comparativa Municipal (Robo de Vehículo - Denuncias Trimestrales)</h3>

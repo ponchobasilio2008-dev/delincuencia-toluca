@@ -1,10 +1,19 @@
+// --- LÓGICA DE MENÚ HAMBURGUESA (GLOBAL) ---
+// Estas funciones deben estar declaradas globalmente (fuera de DOMContentLoaded) para el onclick en HTML
+window.openNav = function() {
+    document.getElementById("sidebar-menu").style.width = "250px"; 
+};
+
+function closeNav() {
+    document.getElementById("sidebar-menu").style.width = "0";
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Lógica de Mapa de Estados (INEGI Style) ---
+    // --- 1. Lógica de Mapa de Estados (PÁGINA estados.html) ---
 
     if (document.getElementById('mapa-estados')) {
-        // ... (Este bloque es el que ya tienes para la página estados.html) ...
-        
         const mexicoCoords = [23.6345, -102.5528]; 
         const initialZoom = 5;
 
@@ -52,16 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
         
-        // Inicializar el panel con los datos de EDOMEX al cargar
         updateInfoPanel(puntosInteres[1].name, puntosInteres[1].hom, puntosInteres[1].rob, puntosInteres[1].esc);
     }
 
     // --- 2. Lógica de Mapa Municipal (PÁGINA municipios.html) ---
 
     if (document.getElementById('mapa-municipal')) {
-        // Coordenadas centradas en Toluca de Lerdo
         const tolucaCoords = [19.2907, -99.6537]; 
-        const municipalZoom = 11; // Nivel de zoom más cercano
+        const municipalZoom = 11; 
 
         const map = L.map('mapa-municipal').setView(tolucaCoords, municipalZoom);
 
@@ -69,21 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // Puntos de incidencia simulada en el Valle de Toluca
         const puntosIncidencia = [
-            { coords: [19.26, -99.66], type: 'Robo de Vehículo', count: 85 }, // Toluca centro/sur
-            { coords: [19.28, -99.60], type: 'Robo a Transeúnte', count: 50 }, // Metepec/Av. Tecnológico
-            { coords: [19.33, -99.68], type: 'Homicidio', count: 12 },        // Zinacantepec zona conurbada
-            { coords: [19.23, -99.55], type: 'Robo de Vehículo', count: 60 }, // Salida a Lerma
+            { coords: [19.26, -99.66], type: 'Robo de Vehículo', count: 85 }, 
+            { coords: [19.28, -99.60], type: 'Robo a Transeúnte', count: 50 }, 
+            { coords: [19.33, -99.68], type: 'Homicidio', count: 12 },        
+            { coords: [19.23, -99.55], type: 'Robo de Vehículo', count: 60 }, 
         ];
 
         puntosIncidencia.forEach(punto => {
-            // Usamos un círculo para simular un "hotspot" o punto de alta incidencia
             L.circle(punto.coords, {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: punto.count * 15 // Radio basado en el conteo para simular "calor"
+                radius: punto.count * 15
             }).addTo(map).bindPopup(`
                 <b>${punto.type}</b><br>
                 Casos reportados (Trimestral): ${punto.count}<br>
@@ -91,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `);
         });
 
-        // Añadir una etiqueta de advertencia en el mapa
         L.marker(tolucaCoords).bindPopup("<b>Toluca Centro</b>").addTo(map);
 
         // Remover el mensaje conceptual del HTML una vez que el mapa carga
