@@ -453,3 +453,33 @@ footer {
     text-align: center;
     font-weight: 500;
 }
+
+/* --- ESTILOS PARA LA VISUALIZACIÓN DE COMENTARIOS --- */
+.comments-container {
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.comment-card {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.comment-card:last-child {
+    border-bottom: none; /* Eliminar la línea divisoria del último comentario */
+}
+
+.comment-card p {
+    margin: 5px 0;
+}
+
+.comment-card .comment-text {
+    margin-left: 15px;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+    font-style: italic;
+    color: #333;
+}

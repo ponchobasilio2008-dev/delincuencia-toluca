@@ -51,7 +51,22 @@
 
         <section class="content-section">
             <h3>Fuentes de Datos Confiables</h3>
-            </section>
+            <p>Toda la información presentada se basa en datos abiertos y reportes oficiales. Las principales fuentes utilizadas son:</p>
+            <ul>
+                <li><strong>INEGI (Instituto Nacional de Estadística y Geografía):</strong> 
+                    <a href="https://www.inegi.org.mx/" target="_blank">Página Oficial del INEGI</a>
+                    <ul>
+                        <li><a href="https://www.inegi.org.mx/programas/envipe/2023/" target="_blank">Encuesta Nacional de Victimización y Percepción (ENVIPE)</a></li>
+                    </ul>
+                </li>
+                <li><strong>SESNSP (Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública):</strong> 
+                    <a href="https://www.gob.mx/sesnsp" target="_blank">Página Oficial del SESNSP</a>
+                    <ul>
+                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva" target="_blank">Datos Abiertos de Incidencia Delictiva</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
         
         <section class="content-section form-section">
             <h3>Deja tus Comentarios</h3>
@@ -85,11 +100,23 @@
                 <div id="form-message" class="form-message"></div>
             </form>
         </section>
+
+        <section class="content-section">
+            <h3>Comentarios de Usuarios</h3>
+            <div id="comments-display-area" class="comments-container">
+                <p class="text-center">Cargando comentarios...</p>
+            </div>
+            <small>Nota: Estos comentarios solo son visibles en este navegador y dispositivo, ya que se guardan en el LocalStorage.</small>
+        </section>
     </main>
 
     <footer>
-        </footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto de Datos Abiertos. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
+        </div>
+    </footer>
     
-    <script src="scripts/formulario.js"></script> <script src="scripts/global.js"></script>
+    <script src="scripts/formulario.js"></script> 
+    <script src="scripts/global.js"></script>
 </body>
 </html>
