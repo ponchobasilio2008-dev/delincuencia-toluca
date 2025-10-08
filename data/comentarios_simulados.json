@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ana López",
+        "correo": "ana.lopez@ejemplo.com",
+        "edad": 35,
+        "comentario": "Excelente análisis del robo de vehículos en Toluca. La visualización es muy clara.",
+        "fecha": "2025-10-07T10:00:00Z"
+    },
+    {
+        "id": 2,
+        "nombre": "Carlos Mtz.",
+        "correo": "carlos.m@ejemplo.com",
+        "edad": 52,
+        "comentario": "El contraste de INEGI y SESNSP es fundamental. Gracias por la información.",
+        "fecha": "2025-10-07T10:05:00Z"
+    },
+    {
+        "id": 3,
+        "nombre": "Sofía G.",
+        "correo": "sofia.g@ejemplo.com",
+        "edad": 28,
+        "comentario": "Me gustaría ver la gráfica de feminicidios con más detalle.",
+        "fecha": "2025-10-07T10:10:00Z"
+    }
+]
