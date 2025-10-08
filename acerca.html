@@ -46,41 +46,50 @@
 
         <section class="content-section">
             <h3>Nuestra Misión</h3>
-            <p>Este proyecto nace de la necesidad de traducir las cifras oficiales de seguridad en información accesible y comprensible para la ciudadanía del Valle de Toluca y del país. Buscamos fomentar una población informada y la participación cívica a través de la visualización de datos provenientes de fuentes confiables, haciendo uso de nuestras herramientas y conociminentos para la creación de una pagina web.</p>
+            <p>Este proyecto nace de la necesidad de traducir las cifras oficiales de seguridad en información accesible y comprensible para la ciudadanía del Valle de Toluca y del país. Buscamos fomentar la discusión informada y la participación cívica a través de la visualización de datos provenientes de fuentes confiables, haciendo uso de código abierto y diseño responsivo.</p>
         </section>
 
         <section class="content-section">
             <h3>Fuentes de Datos Confiables</h3>
-            <p>Toda la información presentada se basa en datos abiertos y reportes oficiales. Las principales fuentes utilizadas son:</p>
-            <ul>
-                <li><strong>INEGI (Instituto Nacional de Estadística y Geografía):</strong> 
-                    <a href="https://www.inegi.org.mx/" target="_blank">Página Oficial del INEGI</a>
-                    <ul>
-                        <li><a href="https://www.inegi.org.mx/programas/envipe/2023/" target="_blank">Encuesta Nacional de Victimización y Percepción (ENVIPE)</a>: Usada para las secciones de Estadísticas (Cifra Negra, Percepción de Inseguridad).</li>
-                    </ul>
-                </li>
-                <li><strong>SESNSP (Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública):</strong> 
-                    <a href="https://www.gob.mx/sesnsp" target="_blank">Página Oficial del SESNSP</a>
-                    <ul>
-                        <li><a href="https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva" target="_blank">Datos Abiertos de Incidencia Delictiva</a>: Usados para las tasas de delitos por estado y municipio (Homicidio, Robo, Feminicidio).</li>
-                    </ul>
-                </li>
-            </ul>
-            <p>Los datos en las gráficas principales son simulados basados en las tendencias reportadas por estas instituciones, con fines de demostración de la visualización y funcionalidad interactiva. Las tasas y porcentajes en las tablas son representaciones realistas de las tendencias nacionales.</p>
-        </section>
+            </section>
         
-        <section class="content-section">
-            <h3>Contacto y Colaboración</h3>
-            <p>Este es un proyecto alojado en GitHub Pages. Sin ningun fin ambicioso o politico, buscamos poder ayudar a la solución de los problemas mencionados en la pagina a base de mostrar datos a los usuarios, dando nuestro mayor esfuerzo para tener ese impacto..</p>
+        <section class="content-section form-section">
+            <h3>Deja tus Comentarios</h3>
+            <p>Tu opinión es valiosa para mejorar la utilidad y el enfoque de este proyecto. ¡Déjanos saber lo que piensas!</p>
+            
+            <form id="comment-form" class="comment-form">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" name="edad" min="18" max="99" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comentario">Comentario (Máx. 100 caracteres):</label>
+                    <textarea id="comentario" name="comentario" maxlength="100" rows="4" required></textarea>
+                    <small id="char-count">0/100</small>
+                </div>
+                
+                <button type="submit" class="stat-button">Enviar Comentario</button>
+                
+                <div id="form-message" class="form-message"></div>
+            </form>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Proyecto Web. Fuentes: INEGI, SESNSP. Datos simulados para fines educativos.</p>
-        </div>
-    </footer>
+        </footer>
     
-    <script src="scripts/global.js"></script>
+    <script src="scripts/formulario.js"></script> <script src="scripts/global.js"></script>
 </body>
 </html>
